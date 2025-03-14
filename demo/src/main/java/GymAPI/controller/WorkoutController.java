@@ -9,61 +9,75 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//Mark class as a REST controller
+import javax.management.RuntimeErrorException;
+
 @RestController
 @RequestMapping("/api/workouts")
-public class WorkoutController{
+public class WorkoutController {
+
     @Autowired
     private WorkoutRepository workoutRepository;
 
-    /*------------GET---------------- */
-    @GetMapping // /api/workouts get all workouts from data with URL
-    public List<Workout> getAllWorkouts(){
+    // ------------------- GET -----------------------
+
+    // Get all workouts
+    @GetMapping
+    public List<Workout> getAllWorkouts() {
         return workoutRepository.findAll();
     }
 
-    @GetMapping("/{id}") // /api/workouts/{id} -> get a workout by id with URL
-    public Workout getWorkoutByID(@PathVariable Long id){
+    // Get a workout by ID
+    @GetMapping("/{id}")
+    public Workout getWorkoutByID(@PathVariable Long id) {
         return workoutRepository.findById(id).orElse(null);
     }
 
-    @GetMapping("/user{userID}")
+    // Get workouts by user ID
+    @GetMapping("/user/{userID}")
+    public List<Workout> getWorkoutsByuser_id(@PathVariable Long user_id) {
+        return workoutRepository.findByUserId(user_id);
+    }
 
-    /*---------------POST--------------- */
-    @PostMapping //Create new workout with url /api/workouts
-    public Workout createWorkout(@RequestBody Workout workout){
+    // ------------------- POST -----------------------
+
+    // Create new workout
+    @PostMapping
+    public Workout createWorkout(@RequestBody Workout workout) {
+        if(workout.getWorkoutName()==null){
+            throw new RuntimeException("Workout name cannot be null");
+        }
         return workoutRepository.save(workout);
     }
 
-    /*------------------PUT---------------------- */
-    //Update an existing workout
-    @PutMapping("/{id}")
-    public Workout updateWorkout(@PathVariable Long id, @RequestBody Workout updateWorkout){
-        Optional<Workout> optionalWorkout = workoutRepository.findById(id);
-        if(optionalWorkout.isPresent()){
-            Workout existingwWorkout = optionalWorkout.get();
-            existingwWorkout.setWorkoutName(updateWorkout.getWorkoutName());
-            existingwWorkout.setWorkoutDate(updateWorkout.getWorkoutDate());
+    // ------------------- PUT -----------------------
 
-            return workoutRepository.save(existingwWorkout);
-        } else{
+    // Update workout by ID
+    @PutMapping("/{id}")
+    public Workout updateWorkout(@PathVariable Long id, @RequestBody Workout updateWorkout) {
+        Optional<Workout> optionalWorkout = workoutRepository.findById(id);
+        if (optionalWorkout.isPresent()) {
+            Workout existingWorkout = optionalWorkout.get();
+            existingWorkout.setWorkoutName(updateWorkout.getWorkoutName());
+            existingWorkout.setWorkoutDate(updateWorkout.getWorkoutDate());
+            return workoutRepository.save(existingWorkout);
+        } else {
             return null;
         }
     }
-    
-    /*---------------DELETE--------------- */
-    //Delete workout by ID with url /api/workouts/{id}
+
+    // ------------------- DELETE -----------------------
+
+    // Delete workout by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWorkout(@PathVariable Long id){
+    public ResponseEntity<String> deleteWorkout(@PathVariable Long id) {
         workoutRepository.deleteById(id);
         return ResponseEntity.ok("Workout has been deleted");
     }
 
-    //Delete all workouts from an associated user
-    @DeleteMapping("/user/{userID}")
-    public ResponseEntity<String> deleteWorkoutByUserID(@PathVariable Long userID){
-        workoutRepository.deleteByUserID(userID);
-        return ResponseEntity.ok("All workouts have been deleted");
+    // Delete all workouts by user ID
+    @DeleteMapping("/user/{user_id}")
+    public ResponseEntity<String> deleteWorkoutByUserID(@PathVariable Long user_id) {
+        workoutRepository.deleteByUserId(user_id);
+        return ResponseEntity.ok("All workouts for user " + user_id + " have been deleted");
     }
-
 }

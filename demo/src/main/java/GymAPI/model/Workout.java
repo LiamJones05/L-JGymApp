@@ -1,6 +1,11 @@
 package GymAPI.model;
 import jakarta.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.cglib.core.Local;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="Workouts")
@@ -10,13 +15,14 @@ public class Workout{
     private Long workout_id;
 
     @Column(nullable =false)
-    private Long userID;
+    private Long userId;
 
     @Column(nullable = false)
-    private String workout_name;
+    private String name;
 
     @Column(nullable = false)
-    private Date workout_date;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate workout_date;
 
 
     //Getters and setters-----------
@@ -29,23 +35,23 @@ public class Workout{
     }
     
     public Long getUserId(){
-        return userID;
+        return userId;
     }
     public void setUserId(Long userID){
-        this.userID = userID;
+        this.userId = userID;
     }
     
     public String getWorkoutName(){
-        return workout_name;
+        return name;
     }
     public void setWorkoutName(String workout_name){
-        this.workout_name = workout_name;
+        this.name = workout_name;
     }
     
-    public Date getWorkoutDate(){
+    public LocalDate getWorkoutDate(){
         return workout_date;
     }
-    public void setWorkoutDate(Date workout_date){
+    public void setWorkoutDate(LocalDate workout_date){
         this.workout_date = workout_date;
     }
 
