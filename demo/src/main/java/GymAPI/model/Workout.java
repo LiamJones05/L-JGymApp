@@ -23,29 +23,29 @@ public class Workout{
     public Long getWorkoutId(){
         return workout_id;
     }
-
-    public void SetWorkoutID(Long workout_id){
+    
+    public void setWorkoutId(Long workout_id){
         this.workout_id = workout_id;
     }
-
-    public Long GetUserID(){
+    
+    public Long getUserId(){
         return userID;
     }
     public void setUserId(Long userID){
         this.userID = userID;
     }
-
-    public String GetWorkoutName(){
+    
+    public String getWorkoutName(){
         return workout_name;
     }
-    public void SetWorkoutName(String workout_name){
+    public void setWorkoutName(String workout_name){
         this.workout_name = workout_name;
     }
-
-    public Date GetWorkoutDate(){
+    
+    public Date getWorkoutDate(){
         return workout_date;
     }
-    public void SetWorkoutDate(Date workout_date){
+    public void setWorkoutDate(Date workout_date){
         this.workout_date = workout_date;
     }
 

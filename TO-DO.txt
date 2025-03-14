@@ -1,0 +1,9 @@
+Add search by workoutID to exercises
+Add delete all exercises with same workoutID
+
+Add search by exerciseID to ExerciseSet
+Add delete all ExerciseSets with same exerciseID
+
+Implemented cascade deletion on account deletion: UserID -> Workout -> Exercise -> ExerciseSet
+Implement cascade deletion on workout deletion: Workout -> Exercise -> ExerciseSet
+Implement cascade deletion on exercise deletion: Exercise -> ExerciseSet
