@@ -1,50 +1,55 @@
 package GymAPI.model;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="ExerciseSets")
-public class ExerciseSet{
+@Table(name = "ExerciseSets")
+public class ExerciseSet {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//auto increment the user id in the table
-    @Column(name= "set_id")
-    private Long set_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "set_id")
+    private Long setId;
 
     @Column(nullable = false)
-    private Long exercise_id;
+    private Long exerciseId;
 
     @Column(nullable = false)
-    private int Reps;
+    private int reps;
 
     @Column(nullable = false)
-    private float Weight;
+    private float weight;
 
-    //Getters and Setters
-    public Long GetSetId(){
-        return set_id;
-    }
-    public void SetSetID(Long set_id){
-        this.set_id = set_id;
+    // Getters and Setters
+    public Long getSetId() {
+        return setId;
     }
 
-    public Long GetExerciseId(){
-        return exercise_id;
-    }
-    public void SetExerciseId(Long exercise_id){
-        this.exercise_id = exercise_id;
+    public void setSetId(Long setId) {
+        this.setId = setId;
     }
 
-    public int GetReps(){
-        return Reps;
-    }
-    public void SetReps(int Reps){
-        this.Reps = Reps;
+    public Long getExerciseId() {
+        return exerciseId;
     }
 
-    public float GetWeight(){
-        return Weight;
-    }
-    public void SetWeight(float Weight){
-        this.Weight = Weight;
+    public void setExerciseId(Long exerciseId) {
+        this.exerciseId = exerciseId;
     }
 
+    public int getReps() {
+        return reps;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
 }

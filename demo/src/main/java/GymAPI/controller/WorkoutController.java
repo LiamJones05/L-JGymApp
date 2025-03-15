@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.management.RuntimeErrorException;
+import org.springframework.transaction.annotation.Transactional;
 
 @RestController
 @RequestMapping("/api/workouts")
@@ -33,7 +34,7 @@ public class WorkoutController {
     }
 
     // Get workouts by user ID
-    @GetMapping("/user/{userID}")
+    @GetMapping("/user/{user_id}")
     public List<Workout> getWorkoutsByuser_id(@PathVariable Long user_id) {
         return workoutRepository.findByUserId(user_id);
     }
@@ -76,6 +77,7 @@ public class WorkoutController {
 
     // Delete all workouts by user ID
     @DeleteMapping("/user/{user_id}")
+    @Transactional
     public ResponseEntity<String> deleteWorkoutByUserID(@PathVariable Long user_id) {
         workoutRepository.deleteByUserId(user_id);
         return ResponseEntity.ok("All workouts for user " + user_id + " have been deleted");

@@ -1,37 +1,44 @@
 package GymAPI.model;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Exercise")
+@Table(name = "exercise")
 public class Exercise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="exercise_id")
-    private Long exercise_ID;
+    @Column(name = "exercise_id")
+    private Long exerciseId;
 
     @Column(nullable = false)
-    private Long workoutID;
+    private Long workoutId;
 
     @Column(nullable = false)
-    private String ExerciseName;
+    private String exerciseName;
 
-    //Getters and Setters
-    public Long SetExerciseID(){
-        return exercise_ID;
+    // Getters and Setters
+    public Long getExerciseId() {
+        return exerciseId;
     }
-    public void GetExerciseID(Long exercise_ID){
-        this.exercise_ID = exercise_ID;
+
+    public void setExerciseId(Long exerciseId) {
+        this.exerciseId = exerciseId;
     }
-    public Long getWorkoutID(){
-        return workoutID;
+
+    public Long getWorkoutId() {
+        return workoutId;
     }
-    public void SetWorkoutID(Long workoutID){
-        this.workoutID = workoutID;
+
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
     }
-    public String GetExerciseName(){
-        return ExerciseName;
+
+    public String getExerciseName() {
+        return exerciseName;
     }
-    public void SetExerciseName(String ExerciseName){
-        this.ExerciseName = ExerciseName;
+
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
     }
 }
